@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Siswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class SiswaController extends Controller
@@ -17,9 +18,26 @@ class SiswaController extends Controller
             'email' => 'required|email|unique:siswas,email|max:50',
             'foto' => 'required|images|mimes:png,jpg|max:100',
         ]);
-        $siswa = Siswa::create($request->all());
-        return redirect()->route('dashboard')->with('success', 'Berhasil Di Tambah');
+        // Masukkan Semua Request Dalam Variabel Data
+        $data = $request->all();
 
+        // Dapatkan Extensi Foto
+        $ext = $request->file('foto')->getClientOriginalExtension();
+
+        // Buat Sebuah Nama Foto Baru
+        $namaFoto = md5($request->file('foto')->getClientOriginalName()) . '.' . $ext;
+
+        // Simpan Foto Dalam Folder Siswa
+        $request->file('foto')->storeAs('siswa', $namaFoto);
+
+        // Ganti Key Foto dalam Array Dengan Variabel namaFoto
+        $data['foto'] = $namaFoto;
+
+        // Simpan Request Kedalam Model Siswa
+        $siswa = Siswa::create($data);
+
+        // Kembali Ke halaman dashboard
+        return redirect()->route('dashboard')->with('success', 'Berhasil Di Tambah');
     }
 
     public function update(Request $request, $id)
@@ -29,10 +47,31 @@ class SiswaController extends Controller
             'nis' => 'required|string|max:20',
             'nama' => 'required|string|max:50',
             'email' => 'required|email|max:50',
-            'foto' => 'required|images|mimes:png,jpg|max:100',
+            'foto' => 'nullable|images|mimes:png,jpg|max:100',
         ]);
 
-        $siswa = Siswa::find($id)->update($request->all());
+        $siswa = Siswa::find($id);
+
+        // Cek Foto Jika Request Ada
+        if ($request->exists('foto')) {
+            $foto = $request->file('foto');
+            $ext = '.' . $foto->getClientOriginalExtension();
+            $namaFoto = $foto->getClientOriginalName() . $ext;
+
+            // Cek Jika DalamFolder Terdapat Foto
+            if (Storage::exists('public/siswa/' . $siswa->foto)) {
+                // Hapus Foto
+                Storage::delete('public/siswa' . $siswa->foto);
+                // Update Foto
+                $siswa->update(['foto' => $namaFoto]);
+            }
+        }
+        $siswa->update([
+            'lmb_siswa' => $request->lmb_siswa,
+            'nis' => $request->nis,
+            'nama' => $request->nama,
+            'email' => $request->email,
+        ]);
 
         return redirect()->route('dashboard')->with('success', 'Berhasil Di Update');
     }
