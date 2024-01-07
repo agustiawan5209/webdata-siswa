@@ -53,6 +53,12 @@ class SiswaController extends Controller
         return redirect()->route('dashboard')->with('success', 'Berhasil Di Tambah');
     }
 
+    public function show($id){
+        return view('admin.show', [
+            'siswa' => Siswa::find($id),
+        ]);
+    }
+
     public function edit(Request $request, $id)
     {
         return view('admin.edit', [

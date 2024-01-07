@@ -38,6 +38,7 @@ Route::group(['prefix'=> 'siswa', 'as'=> 'Siswa.'], function () {
     Route::controller(SiswaController::class)->group(function(){
         Route::get('form', 'create')->name('tambah');
         Route::get('edit/{id}', 'edit')->name('edit');
+        Route::get('show/{id}', 'show')->name('show');
         Route::post('store', 'store')->name('store');
         Route::put('update/{id}', 'update')->name('update');
         Route::delete('delete/{id}', 'delete')->name('delete');

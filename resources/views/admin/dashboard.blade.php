@@ -1,4 +1,5 @@
 @extends('admin.layout')
+
 @section('section')
     <!-- Table Section -->
     <div class="max-w-full px-4 py-4 mx-auto">
@@ -163,7 +164,7 @@
                                                         Hapus
                                                     </span>
                                                 </button>
-                                                <a class="block" href="#">
+                                                <a class="block" href="{{ route('Siswa.show', ['id'=> $siswa->id]) }}">
                                                     <span
                                                         class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -192,43 +193,7 @@
                         <!-- Footer -->
                         <div
                             class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200">
-                            <div class="max-w-sm space-y-3">
-                                <select
-                                    class="py-2 px-3 pe-9 block border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option selected>5</option>
-                                    <option>6</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <div class="inline-flex gap-x-2">
-                                    <button type="button"
-                                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
-                                        <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg"
-                                            width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round">
-                                            <path d="m15 18-6-6 6-6" />
-                                        </svg>
-                                        Prev
-                                    </button>
-
-                                    <button type="button"
-                                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
-                                        Next
-                                        <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg"
-                                            width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round">
-                                            <path d="m9 18 6-6-6-6" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
+                            {{$siswas->links()}}
                         </div>
                         <!-- End Footer -->
                     </div>

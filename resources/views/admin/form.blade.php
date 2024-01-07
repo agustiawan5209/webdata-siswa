@@ -1,4 +1,6 @@
 @extends('admin.layout')
+@section('title', 'tambah Siswa')
+
 @section('section')
     <div class="flex justify-center w-full">
         <div class="max-w-full p-6 rounded-md sm:p-10 bg-gray-900 text-gray-100">
