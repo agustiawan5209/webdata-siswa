@@ -9,7 +9,20 @@ use Illuminate\Support\Facades\Validator;
 
 class SiswaController extends Controller
 {
-    public function create(Request $request)
+
+    public function create()
+    {
+        return view('admin.form');
+    }
+
+
+    /**
+     * store
+     *  Buat Model Siswa
+     * @param  mixed $request
+     * @return void
+     */
+    public function store(Request $request)
     {
         $valid = Validator::make($request->all(), [
             'lmb_siswa' => 'in:latiseducation,tutorindonesia',
@@ -40,6 +53,20 @@ class SiswaController extends Controller
         return redirect()->route('dashboard')->with('success', 'Berhasil Di Tambah');
     }
 
+    public function edit(Request $request, $id)
+    {
+        return view('admin.edit', [
+            'siswa' => Siswa::find($id),
+        ]);
+    }
+
+    /**
+     * update
+     *  Update Model Siswa
+     * @param  mixed $request
+     * @param  mixed $id
+     * @return void
+     */
     public function update(Request $request, $id)
     {
         $valid = Validator::make($request->all(), [
@@ -78,7 +105,13 @@ class SiswaController extends Controller
 
     public function delete(Request $request, $id)
     {
-        $siswa = Siswa::find($id)->delete();
+        $siswa = Siswa::find($id);
+        // Cek Jika DalamFolder Terdapat Foto
+        if (Storage::exists('public/siswa/' . $siswa->foto)) {
+            // Hapus Foto
+            Storage::delete('public/siswa' . $siswa->foto);
+        }
+        $siswa->delete();
 
         return redirect()->route('dashboard')->with('success', 'Berhasil Di Hapus');
     }
