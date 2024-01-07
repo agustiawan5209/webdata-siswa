@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ env('APP_NAME', 'DataSiswa') }} - @yield('title', 'Data Siswa')</title>
 
-    @vite('resources/css/app.css')
+    {{-- @vite('resources/css/app.css') --}}
 
     <style>
         .show {
@@ -15,6 +15,7 @@
         }
     </style>
     <script src="{{ asset('vendor/sweetalert/sweetalert.all.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('build/assets/app-fc5e0ff8.css') }}">
 
 </head>
 
@@ -66,6 +67,8 @@
             </div>
         </div>
     </main>
+
+    <script src="{{ asset('build/assets/app-1aefb37c.js') }}"></script>
 
     <script>
         function toggleDropdown() {

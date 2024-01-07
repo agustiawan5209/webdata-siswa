@@ -12,8 +12,7 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 
     <!-- Styles -->
-    @vite('resources/css/app.css')
-
+   <link rel="stylesheet" href="{{ asset('build/assets/app-fc5e0ff8.css') }}">
 </head>
 
 <body class="antialiased">
@@ -48,6 +47,7 @@
             </div>
         </section>
     </div>
+    <script src="{{ asset('build/assets/app-1aefb37c.js') }}"></script>
 
 </body>
 
