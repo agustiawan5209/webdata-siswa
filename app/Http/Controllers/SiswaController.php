@@ -39,7 +39,7 @@ class SiswaController extends Controller
         $ext = $request->file('foto')->getClientOriginalExtension();
 
         // Buat Sebuah Nama Foto Baru
-        $namaFoto = md5($request->file('foto')->getClientOriginalName()). rand(1,99) . '.' . $ext;
+        $namaFoto = md5($request->file('foto')->getClientOriginalName()) . rand(1, 99) . '.' . $ext;
 
         // Simpan Foto Dalam Folder Siswa
         $request->file('foto')->storeAs('public/siswa/', $namaFoto);
@@ -90,7 +90,7 @@ class SiswaController extends Controller
         if ($request->exists('foto')) {
             $foto = $request->file('foto');
             $ext = '.' . $foto->getClientOriginalExtension();
-            $namaFoto = $foto->getClientOriginalName() . $ext;
+            $namaFoto = md5($foto->getClientOriginalName()) . rand(1, 99) . $ext;
 
             // Cek Jika DalamFolder Terdapat Foto
             if (Storage::exists('public/siswa/' . $siswa->foto)) {
@@ -98,6 +98,8 @@ class SiswaController extends Controller
                 Storage::delete('public/siswa/' . $siswa->foto);
                 // Update Foto
             }
+            $request->file('foto')->storeAs('public/siswa/', $namaFoto);
+
             $siswa->update(['foto' => $namaFoto]);
         }
         $siswa->update([
