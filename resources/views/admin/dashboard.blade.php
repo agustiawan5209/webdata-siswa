@@ -17,8 +17,7 @@
                                 @method('GET')
                                 <label for="search" class="sr-only">Search</label>
                                 <div class="relative">
-                                    <input type="text"
-                                        name="search"
+                                    <input type="text" name="search"
                                         class="py-2 px-3 ps-11 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                                         placeholder="Search">
                                     <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-4">
@@ -36,7 +35,7 @@
                             <div class="sm:col-span-2 md:grow">
                                 <div class="flex justify-end gap-x-2">
                                     <div class="relative inline-block [--placement:bottom-right]">
-                                        <a  href="{{ route('Siswa.export', ['search'=> $search]) }}"
+                                        <a href="{{ route('Siswa.export', ['search' => $search]) }}"
                                             class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
                                             <svg class="flex-shrink-0 w-3 h-3" xmlns="http://www.w3.org/2000/svg"
                                                 width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
@@ -64,6 +63,13 @@
                         <table class="min-w-full divide-y divide-gray-200 ">
                             <thead class="bg-gray-50">
                                 <tr>
+                                    <th scope="col" class="px-6 py-3 text-start">
+                                        <div class="flex items-center gap-x-2">
+                                            <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 ">
+                                                No
+                                            </span>
+                                        </div>
+                                    </th>
                                     <th scope="col" class="px-6 py-3 text-start">
                                         <div class="flex items-center gap-x-2">
                                             <span class="text-xs font-semibold uppercase tracking-wide text-gray-800 ">
@@ -110,18 +116,23 @@
                                 @foreach ($siswas as $siswa)
                                     <tr class="bg-white hover:bg-gray-50">
                                         <td class="h-px w-px whitespace-nowrap align-top">
-                                            <a class="block p-6" href="#">
-                                                <span
-                                                    class="block text-sm font-semibold text-gray-800 ">{{ $siswa->nis }}</span>
-                                            </a>
+                                            <div class="block p-6" href="#">
+                                                {{ $loop->iteration }}
+                                            </div>
                                         </td>
                                         <td class="h-px w-px whitespace-nowrap align-top">
-                                            <a class="block p-6" href="#">
+                                            <div class="block p-6" href="#">
+                                                <span
+                                                    class="block text-sm font-semibold text-gray-800 ">{{ $siswa->nis }}</span>
+                                            </div>
+                                        </td>
+                                        <td class="h-px w-px whitespace-nowrap align-top">
+                                            <div class="block p-6" href="#">
                                                 <div class="flex items-center gap-x-3">
                                                     <span
                                                         class="block text-sm font-semibold text-gray-800 ">{{ $siswa->nama }}</span>
                                                 </div>
-                                            </a>
+                                            </div>
                                         </td>
                                         <td class="h-px w-72 min-w-[18rem] align-top">
                                             <div class="block p-6">
@@ -167,7 +178,7 @@
                                                         Hapus
                                                     </span>
                                                 </button>
-                                                <a class="block" href="{{ route('Siswa.show', ['id'=> $siswa->id]) }}">
+                                                <a class="block" href="{{ route('Siswa.show', ['id' => $siswa->id]) }}">
                                                     <span
                                                         class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -194,9 +205,8 @@
                         <!-- End Table -->
 
                         <!-- Footer -->
-                        <div
-                            class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200">
-                            {{$siswas->links()}}
+                        <div class="px-6 py-4  md:flex md:justify-around md:items-center border-t border-gray-200">
+                            {{ $siswas->links() }}
                         </div>
                         <!-- End Footer -->
                     </div>

@@ -16,7 +16,7 @@ class DashboardController extends Controller
             $query->orWhere("nama", "like", "%" . $search . "%");
             $query->orWhere("email", "like", "%" . $search . "%");
         })
-            ->paginate(10);
+            ->orderBy('id','desc')->paginate(5);
         return view("admin.dashboard", [
             'siswas' => $siswa,
             'search'=> $search,

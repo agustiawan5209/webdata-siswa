@@ -25,14 +25,7 @@
             <div class="flex flex-col h-full p-3 w-full ">
                 <div class="space-y-3">
                     <div class="flex items-center justify-between">
-                        <h2>Dashboard</h2>
-                        <button class="p-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-5 h-5 fill-current dark:text-gray-100">
-                                <rect width="352" height="32" x="80" y="96"></rect>
-                                <rect width="352" height="32" x="80" y="240"></rect>
-                                <rect width="352" height="32" x="80" y="384"></rect>
-                            </svg>
-                        </button>
+                        <h2>Selamat Datang</h2>
                     </div>
                     <div class="flex-1">
                         <ul class="pt-2 pb-4 space-y-1 text-base">

@@ -7,7 +7,6 @@ use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
 
 class SiswaController extends Controller
 {
@@ -26,12 +25,12 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-        $valid = Validator::make($request->all(), [
+        $this->validate($request, [
             'lmb_siswa' => 'required|in:latiseducation,tutorindonesia',
             'nis' => 'required|string|max:20',
             'nama' => 'required|string|max:50',
             'email' => 'required|email|unique:siswas,email|max:50',
-            'foto' => 'required|images|mimes:png,jpg|max:100',
+            'foto' => 'required|image|mimes:png,jpg|max:100',
         ]);
         // Masukkan Semua Request Dalam Variabel Data
         $data = $request->all();
@@ -40,7 +39,7 @@ class SiswaController extends Controller
         $ext = $request->file('foto')->getClientOriginalExtension();
 
         // Buat Sebuah Nama Foto Baru
-        $namaFoto = md5($request->file('foto')->getClientOriginalName()) . '.' . $ext;
+        $namaFoto = md5($request->file('foto')->getClientOriginalName()). rand(1,99) . '.' . $ext;
 
         // Simpan Foto Dalam Folder Siswa
         $request->file('foto')->storeAs('public/siswa/', $namaFoto);
@@ -55,7 +54,8 @@ class SiswaController extends Controller
         return redirect()->route('dashboard')->with('success', 'Berhasil Di Tambah');
     }
 
-    public function show($id){
+    public function show($id)
+    {
         return view('admin.show', [
             'siswa' => Siswa::find($id),
         ]);
@@ -77,16 +77,15 @@ class SiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $valid = Validator::make($request->all(), [
+        $this->validate($request, [
             'lmb_siswa' => 'required|in:latiseducation,tutorindonesia',
             'nis' => 'required|string|max:20',
             'nama' => 'required|string|max:50',
             'email' => 'required|email|max:50',
-            'foto' => 'nullable|images|mimes:png,jpg|max:100',
+            'foto' => 'nullable|image|mimes:png,jpg|max:100',
         ]);
 
         $siswa = Siswa::find($id);
-
         // Cek Foto Jika Request Ada
         if ($request->exists('foto')) {
             $foto = $request->file('foto');
@@ -98,8 +97,8 @@ class SiswaController extends Controller
                 // Hapus Foto
                 Storage::delete('public/siswa/' . $siswa->foto);
                 // Update Foto
-                $siswa->update(['foto' => $namaFoto]);
             }
+            $siswa->update(['foto' => $namaFoto]);
         }
         $siswa->update([
             'lmb_siswa' => $request->lmb_siswa,
