@@ -25,7 +25,7 @@ class SiswaController extends Controller
     public function store(Request $request)
     {
         $valid = Validator::make($request->all(), [
-            'lmb_siswa' => 'in:latiseducation,tutorindonesia',
+            'lmb_siswa' => 'required|in:latiseducation,tutorindonesia',
             'nis' => 'required|string|max:20',
             'nama' => 'required|string|max:50',
             'email' => 'required|email|unique:siswas,email|max:50',
@@ -41,7 +41,7 @@ class SiswaController extends Controller
         $namaFoto = md5($request->file('foto')->getClientOriginalName()) . '.' . $ext;
 
         // Simpan Foto Dalam Folder Siswa
-        $request->file('foto')->storeAs('siswa', $namaFoto);
+        $request->file('foto')->storeAs('public/siswa/', $namaFoto);
 
         // Ganti Key Foto dalam Array Dengan Variabel namaFoto
         $data['foto'] = $namaFoto;
@@ -70,7 +70,7 @@ class SiswaController extends Controller
     public function update(Request $request, $id)
     {
         $valid = Validator::make($request->all(), [
-            'lmb_siswa' => 'in:latiseducation,tutorindonesia',
+            'lmb_siswa' => 'required|in:latiseducation,tutorindonesia',
             'nis' => 'required|string|max:20',
             'nama' => 'required|string|max:50',
             'email' => 'required|email|max:50',
@@ -88,7 +88,7 @@ class SiswaController extends Controller
             // Cek Jika DalamFolder Terdapat Foto
             if (Storage::exists('public/siswa/' . $siswa->foto)) {
                 // Hapus Foto
-                Storage::delete('public/siswa' . $siswa->foto);
+                Storage::delete('public/siswa/' . $siswa->foto);
                 // Update Foto
                 $siswa->update(['foto' => $namaFoto]);
             }
@@ -109,7 +109,7 @@ class SiswaController extends Controller
         // Cek Jika DalamFolder Terdapat Foto
         if (Storage::exists('public/siswa/' . $siswa->foto)) {
             // Hapus Foto
-            Storage::delete('public/siswa' . $siswa->foto);
+            Storage::delete('public/siswa/' . $siswa->foto);
         }
         $siswa->delete();
 

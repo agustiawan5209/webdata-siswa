@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,15 @@ Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard')
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Controller Siswa
+Route::group(['prefix'=> 'siswa', 'as'=> 'Siswa.'], function () {
+    Route::controller(SiswaController::class)->group(function(){
+        Route::get('form', 'create')->name('tambah');
+        Route::get('edit/{id}', 'edit')->name('edit');
+        Route::post('store', 'store')->name('store');
+        Route::put('update/{id}', 'update')->name('update');
+        Route::delete('delete', 'delete')->name('delete');
+    });
+});
+

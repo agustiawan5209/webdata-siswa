@@ -19,6 +19,15 @@
                 <div class="w-full">
                     <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account
                     </h2>
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul class="list-item bg-transparent">
+                            @foreach ($errors->all() as $error)
+                                <li class="text-red-400 underline text-sm">{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 </div>
 
                 <div class="mt-10 w-full">
