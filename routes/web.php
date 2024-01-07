@@ -40,7 +40,7 @@ Route::group(['prefix'=> 'siswa', 'as'=> 'Siswa.'], function () {
         Route::get('edit/{id}', 'edit')->name('edit');
         Route::post('store', 'store')->name('store');
         Route::put('update/{id}', 'update')->name('update');
-        Route::delete('delete', 'delete')->name('delete');
+        Route::delete('delete/{id}', 'delete')->name('delete');
     });
 });
 
