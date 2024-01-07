@@ -2,7 +2,7 @@
 @section('title', 'tambah Siswa')
 
 @section('section')
-    <div class="flex justify-center w-full">
+    <div class="flex justify-center w-full py-10">
         <div class="max-w-full p-6 rounded-md sm:p-10 bg-gray-900 text-gray-100">
             <div class="mb-8 text-center">
                 <h1 class="my-3 text-4xl font-bold">Tambah Data Mahasiswa</h1>

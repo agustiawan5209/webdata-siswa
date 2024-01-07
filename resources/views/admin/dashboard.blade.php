@@ -12,11 +12,13 @@
                         <div
                             class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200">
                             <!-- Input -->
-                            <div class="sm:col-span-1">
-                                <label for="hs-as-table-product-review-search" class="sr-only">Search</label>
+                            <form action="{{ route('dashboard') }}" class="sm:col-span-1 flex" method="GET">
+                                @csrf
+                                @method('GET')
+                                <label for="search" class="sr-only">Search</label>
                                 <div class="relative">
-                                    <input type="text" id="hs-as-table-product-review-search"
-                                        name="hs-as-table-product-review-search"
+                                    <input type="text"
+                                        name="search"
                                         class="py-2 px-3 ps-11 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                                         placeholder="Search">
                                     <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-4">
@@ -27,13 +29,14 @@
                                         </svg>
                                     </div>
                                 </div>
-                            </div>
+                                <button type="submit" class="py-1 px-1.5  font-medium bg-blue-800 text-white">cari</button>
+                            </form>
                             <!-- End Input -->
 
                             <div class="sm:col-span-2 md:grow">
                                 <div class="flex justify-end gap-x-2">
-                                    <div class="hs-dropdown relative inline-block [--placement:bottom-right]">
-                                        <button id="hs-as-table-table-export-dropdown" type="button"
+                                    <div class="relative inline-block [--placement:bottom-right]">
+                                        <a  href="{{ route('Siswa.export', ['search'=> $search]) }}"
                                             class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
                                             <svg class="flex-shrink-0 w-3 h-3" xmlns="http://www.w3.org/2000/svg"
                                                 width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
@@ -43,10 +46,10 @@
                                                     d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
                                             </svg>
                                             Export
-                                        </button>
+                                        </a>
                                     </div>
 
-                                    <div class="hs-dropdown relative inline-block [--placement:bottom-right]">
+                                    <div class="relative inline-block [--placement:bottom-right]">
                                         <a href="{{ route('Siswa.tambah') }}"
                                             class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-blue-700 text-white shadow-sm hover:bg-blue-800 ">
                                             Tambah

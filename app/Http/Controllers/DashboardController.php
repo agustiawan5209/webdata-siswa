@@ -7,12 +7,19 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $siswa = Siswa::paginate(10);
-        // dd(Siswa::find(1)->foto_path);
+        $search = $request->search;
+        $siswa = Siswa::when($search ?? null, function ($query, $search) {
+            $query->where("lmb_siswa", "like", "%" . $search . "%");
+            $query->orWhere("nis", "like", "%" . $search . "%");
+            $query->orWhere("nama", "like", "%" . $search . "%");
+            $query->orWhere("email", "like", "%" . $search . "%");
+        })
+            ->paginate(10);
         return view("admin.dashboard", [
-            'siswas'=> $siswa,
+            'siswas' => $siswa,
+            'search'=> $search,
         ]);
     }
 }

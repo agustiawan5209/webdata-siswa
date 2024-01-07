@@ -17,7 +17,7 @@
         <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
             <div class="shadow-lg sm:mx-auto sm:w-full sm:max-w-md px-5 py-2">
                 <div class="w-full">
-                    <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account
+                    <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Masuk Ke Dalam Akun
                     </h2>
                     @if ($errors->any())
                     <div class="alert alert-danger">

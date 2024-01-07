@@ -32,6 +32,9 @@ Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard')
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/profile', function () {
+    return view('admin.profile');
+})->name('profile');
 
 // Controller Siswa
 Route::group(['prefix'=> 'siswa', 'as'=> 'Siswa.'], function () {
