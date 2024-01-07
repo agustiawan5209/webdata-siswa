@@ -42,6 +42,9 @@ Route::group(['prefix'=> 'siswa', 'as'=> 'Siswa.'], function () {
         Route::post('store', 'store')->name('store');
         Route::put('update/{id}', 'update')->name('update');
         Route::delete('delete/{id}', 'delete')->name('delete');
+
+        // Export Data Siswa
+        Route::get('export', 'export')->name('export');
     });
 });
 

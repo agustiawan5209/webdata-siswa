@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SiswaExport;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -120,5 +122,11 @@ class SiswaController extends Controller
         $siswa->delete();
 
         return redirect()->route('dashboard')->with('success', 'Berhasil Di Hapus');
+    }
+
+    // Fungsi Export Data Siswa
+    public function export()
+    {
+        return Excel::download(new SiswaExport, 'data-export.xlsx');
     }
 }
